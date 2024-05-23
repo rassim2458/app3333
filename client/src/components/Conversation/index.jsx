@@ -8,6 +8,8 @@ import { DocMsg ,LinkMsg,MediaMsg,TimeLine, TextMsg} from './MsgTypes';
 import { useQuery } from 'react-query';
 import { fetchConversationMessages } from '../../services/conversationdata';
 import { useSelector} from 'react-redux';
+import useResponsive from "../../hooks/useResponsive";
+
 
 const Conversation = ({data,user,socket}) => {
   const { room_id } = useSelector((store) => store.app);
@@ -24,6 +26,7 @@ const Conversation = ({data,user,socket}) => {
     
     const messagesContainerRef = useRef(null);
 
+    const isMobile = useResponsive("between", "md", "xs", "sm");
 
     useEffect(() => {
       scrollToBottom();
@@ -36,13 +39,13 @@ const Conversation = ({data,user,socket}) => {
     };
 
   return (
-    <Stack height={'100%'} maxHeight={'100vh'} width={'auto'}>
+    <Stack height={'100%'} maxHeight={'100vh'} width={isMobile ? "100vw" : "auto"}>
 
         {/* Chat header */}
         <Header user={user} conversations={conversations} userInfo={userInfo}/>
         {/* Msg */}
         <Box  className='scrollbar' ref={messagesContainerRef} width={"100%"} sx={{flexGrow:1, height:'100%', overflowY:'scroll'}}>
-        <Message  socket={socket} roomId={roomId} user={user} menu={true} data={data} />
+        <Message  socket={socket} roomId={roomId} user={user} menu={true} data={data} isMobile={isMobile}/>
        
         </Box>
         {/* Chat footer */}

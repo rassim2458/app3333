@@ -5,7 +5,7 @@ import { fetchConversationMessages } from '../../services/conversationdata';
 import { useQuery, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 
-const Message = ({ user, menu, data, selectedRoomId, socket }) => {
+const Message = ({ user, menu, data, selectedRoomId, socket,isMobile }) => {
   //const current_userId = useSelector((state) => state.app.currentUserId);
   const current_userId = "664a811cdc0cd2557f81c2c6";
   const room_id = useSelector((state) => state.app.room_id);
@@ -77,7 +77,7 @@ const Message = ({ user, menu, data, selectedRoomId, socket }) => {
   }
 
   return (
-    <Box p={3}>
+    <Box p={isMobile ? 1 : 3}>
       <Stack ref={messageListRef} spacing={3}>
         {localMessages && localMessages.map((message) => (
           <TextMsg

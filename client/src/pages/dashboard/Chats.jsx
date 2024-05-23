@@ -6,9 +6,12 @@ import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Sea
 import ChatElement from '../../components/ChatElement';
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
+import useResponsive from "../../hooks/useResponsive";
+
 
 const Chats = ({data,setUser,handleChatElementClick}) => {
   const theme = useTheme();
+  const isDesktop = useResponsive("up", "md");
   
   const userId = "6626b9ee6bd62e977623db98"; 
   const { conversations = [], userInfo = [], messages = [] } = data || {};
@@ -16,12 +19,12 @@ const Chats = ({data,setUser,handleChatElementClick}) => {
 
   return (
     <Box sx={{
-      position: "relative", width: 280, height: "100%",
+      position: "relative", width: isDesktop ? 260 : "100vw", height: isDesktop ? '90vh' : "100vw",
       backgroundColor: theme.palette.mode === 'light' ? "#F8FAFF" : theme.palette.background.paper,
       boxShadow: '0px 0px 2px rgba(0,0,0,0.25)'
     }}>
       
-      <Stack p={3} spacing={2} sx={{ height: "93vh", overflow:'hidden' }}>
+      <Stack p={3} spacing={2} sx={{ maxHeight: "100vh"}}>
         <Stack direction="row" alignItems='center' justifyContent='space-between'>
           <Typography variant='h5'>
             Chats
@@ -38,7 +41,7 @@ const Chats = ({data,setUser,handleChatElementClick}) => {
         </Stack>
 
         <Stack className='scrollbar' spacing={2} direction='column' sx={{ flexGrow: 1, overflow: 'scroll', height: '100%' }}>
-          <Stack spacing={1.5}>
+          <Stack spacing={1}>
             {conversations.map((el,index) => {
                 const otherUserName = userInfo[index] ? `${userInfo[index].firstname} ${userInfo[index].lastname}` : '';
                 //console.log(otherUserName);

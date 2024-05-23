@@ -35,7 +35,7 @@ const Sidebar = () => {
 	const { data } = useQuery({ queryKey: ["authUser"] });
 
 	return (
-		<div className='md:flex-[2_2_0] max-h-screen pt-3 w-18 z-1 h-[calc(100vh - 64)]  ' >
+		<div className=' max-h-screen pt-3 w-18 z-1 h-[calc(100vh - 64)]  ' >
 			<div className=' left-0 h-full flex flex-col  w-20 md:w-full'>
 				
 				<ul className='flex flex-col gap-3 mt-2'>
