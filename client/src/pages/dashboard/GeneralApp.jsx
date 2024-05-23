@@ -183,7 +183,7 @@ const GeneralApp = () => {
       <Stack direction='row' sx={{ width: '100%' }}>
         <Chats userId={currentuser} setUser={setUser}   handleChatElementClick={handleChatElementClick} />
         <Box sx={{
-           height:'93vh', width: sidebar.open ? 'calc(1880px - 740px)' : 'calc(1880px - 420px)',
+           height:'100%', width: sidebar.open ? 'calc(100vw- 740px)' : 'calc(100vw - 420px)',
           backgroundColor: theme.palette.mode === 'light' ? '#F0F4FA' : theme.palette.background.default
         }}>
           {isChatClicked && room_id !== null && chat_type === "individual" ?  <Conversation socket={socketRef.current} userId={currentuser} user={user} data={result.data} /> :
